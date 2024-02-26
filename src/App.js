@@ -1,25 +1,36 @@
-import logo from './logo.svg';
+import React, {useContext} from "react";
+import { ThemeContext, ThemeProvider } from  './Context/themeContext';
 import './App.css';
+import ConterApp from "./CounterApp";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+function AppThemes(){
+    const {theme, changeTheme} = useContext(ThemeContext);
+    
+   
+   
+
+    return(
+        <div className={`App ${theme}`}>
+            <h1>{theme.charAt(0).toUpperCase() + theme.slice(1)} Mode</h1>
+            <button onClick={changeTheme}>themeToggle</button>
+            
+        </div>
+    );
+}
+
+
+
+
+function App(){
+
+    return(
+        <ThemeProvider>
+            <AppThemes/>
+            <ConterApp/>
+        </ThemeProvider>
+    );
+
 }
 
 export default App;
